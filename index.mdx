@@ -1,255 +1,82 @@
 ---
 title: MoveLens
-description: AI-powered security auditor for Sui Move smart contracts.
-mode: custom
+description: Security auditing for Sui Move contracts. 4-layer hybrid engine, permanent Walrus storage, zero paid AI APIs. Built for Sui Overflow 2026.
 ---
 
-<div style={{
-  minHeight: "100vh",
-  background: "#0A0A0A",
-  color: "#fff",
-  fontFamily: "system-ui, -apple-system, sans-serif",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  padding: "0 24px"
-}}>
+# MoveLens
 
-  {/* Hero */}
-  <div style={{
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    textAlign: "center",
-    paddingTop: "96px",
-    maxWidth: "720px",
-    width: "100%"
-  }}>
-    <img src="/logo/Logo.png" alt="MoveLens" style={{ height: "64px", marginBottom: "40px" }} />
+Security auditing for Sui Move smart contracts. Deterministic rule engine, OpenZeppelin benchmarks, LanceDB semantic recall, and a Groq LLM ensemble — unified into one pipeline that stores permanent encrypted reports on **Walrus**. Built for Sui Overflow 2026 (Walrus track).
 
-    <div style={{
-      display: "inline-flex",
-      alignItems: "center",
-      gap: "8px",
-      background: "rgba(77,162,255,0.08)",
-      border: "1px solid rgba(77,162,255,0.2)",
-      borderRadius: "999px",
-      padding: "6px 16px",
-      fontSize: "12px",
-      color: "#4DA2FF",
-      letterSpacing: "0.08em",
-      fontWeight: 600,
-      marginBottom: "28px",
-      textTransform: "uppercase"
-    }}>
-      Sui Overflow 2026 · Walrus Track
-    </div>
+<CardGroup cols={3}>
+  <Card title="Deterministic Rule Engine" icon="list-check" href="/architecture/layer1">
+    65 regex rules across 13 vulnerability sectors. Fires on sanitized source with binary-search line tracking. Confidence 1.0, sub-second runtime.
+  </Card>
+  <Card title="ML Ensemble (Layer 4)" icon="brain" href="/architecture/layer4">
+    Jina embeddings for cosine similarity + Groq `llama-3.3-70b-versatile` for natural-language classification. Free tier, 20 RPM cap, graceful fallback.
+  </Card>
+  <Card title="On-Chain Reports" icon="database" href="/onchain/walrus">
+    Every audit is a Walrus blob — three-entry quilt with public metadata, Seal-encrypted findings, and a human-readable summary. Optional MVR attestation.
+  </Card>
+</CardGroup>
 
-    <h1 style={{
-      fontSize: "clamp(36px, 6vw, 64px)",
-      fontWeight: 700,
-      lineHeight: 1.1,
-      letterSpacing: "-0.03em",
-      margin: "0 0 20px",
-      background: "linear-gradient(135deg, #fff 40%, rgba(255,255,255,0.5))",
-      WebkitBackgroundClip: "text",
-      WebkitTextFillColor: "transparent"
-    }}>
-      Security auditing for<br />Sui Move contracts
-    </h1>
+## What you get
 
-    <p style={{
-      fontSize: "18px",
-      color: "rgba(255,255,255,0.5)",
-      lineHeight: 1.7,
-      margin: "0 0 40px",
-      maxWidth: "560px"
-    }}>
-      Four-layer hybrid analysis — deterministic rules, OZ benchmarks, LanceDB semantic recall, and Groq LLM classification. Reports stored permanently on Walrus.
-    </p>
+- **Layer 1** — 65 compiled regex rules + 19 AST stubs across 13 Move vulnerability sectors
+- **Layer 2** — 10 OpenZeppelin-class pattern-absence checks (what's missing, not just what's wrong)
+- **Layer 3** — LanceDB vector memory of 52 historically exploited Move snippets, grows as you audit
+- **Layer 4** — Groq `llama-3.3-70b-versatile` classifies ambiguous snippets; Jina embeddings boost confidence on corpus matches
+- **Walrus storage** — permanent blob per audit; quilt contains `report.json`, `findings.enc`, `summary.md`
+- **Seal encryption** — IBE threshold encryption on the findings entry; only the package owner can decrypt
+- **MVR attestation** — optional `set_metadata` call links the blob to a `PackageInfo` object on-chain
+- **GitHub repo auditing** — paste a URL, MoveLens clones it, finds all `.move` files, runs the full pipeline
+- **MCP server** — three tools for Claude Desktop and Claude Code: source, package ID, GitHub repo
+- **SQLite job store** — audit jobs survive server restarts; auto-pruned after 24 hours
 
-    <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", justifyContent: "center" }}>
-      <a href="https://movelens.onrender.com/app" style={{
-        background: "#4DA2FF",
-        color: "#000",
-        fontWeight: 700,
-        fontSize: "14px",
-        padding: "12px 28px",
-        borderRadius: "999px",
-        textDecoration: "none",
-        letterSpacing: "0.01em"
-      }}>
-        Launch Audit →
-      </a>
-      <a href="/quickstart" style={{
-        background: "rgba(255,255,255,0.06)",
-        border: "1px solid rgba(255,255,255,0.1)",
-        color: "#fff",
-        fontWeight: 600,
-        fontSize: "14px",
-        padding: "12px 28px",
-        borderRadius: "999px",
-        textDecoration: "none"
-      }}>
-        Read the docs
-      </a>
-    </div>
-  </div>
+## How the pieces fit
 
-  {/* Divider */}
-  <div style={{
-    width: "100%",
-    maxWidth: "800px",
-    height: "1px",
-    background: "rgba(255,255,255,0.06)",
-    margin: "80px 0 64px"
-  }} />
+```
+Input (address / source / GitHub URL)
+  │
+  ├─ Layer 1: 65 regex rules → findings (confidence 1.0)
+  ├─ Layer 2: 10 OZ checks  → findings (confidence 0.95)
+  ├─ Layer 3: LanceDB recall → memory context injected into Layer 4 prompt
+  └─ Layer 4: Groq + Jina   → findings (confidence model-dependent, severity-floored)
+       │
+       └─ Engine: merge + dedupe + severity floor + sort (Cetus-class first)
+            │
+            └─ AuditReport → Seal encrypt → Walrus quilt → blobId
+                                                │
+                                                └─ (optional) MVR set_metadata → txDigest
+```
 
-  {/* Stats row */}
-  <div style={{
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
-    gap: "24px",
-    width: "100%",
-    maxWidth: "800px",
-    marginBottom: "80px",
-    textAlign: "center"
-  }}>
-    {[
-      { value: "65", label: "Regex rules" },
-      { value: "10", label: "OZ benchmarks" },
-      { value: "52", label: "Corpus snippets" },
-      { value: "4", label: "Analysis layers" },
-      { value: "116", label: "Total rule IDs" },
-      { value: "$223M", label: "Exploits detected" },
-    ].map(stat => (
-      <div key={stat.label}>
-        <div style={{ fontSize: "32px", fontWeight: 700, color: "#4DA2FF", lineHeight: 1 }}>{stat.value}</div>
-        <div style={{ fontSize: "13px", color: "rgba(255,255,255,0.4)", marginTop: "6px" }}>{stat.label}</div>
-      </div>
-    ))}
-  </div>
+The Cetus CLMM package (`0xa9b0ffe2...`, mainnet) fires rule `ML-INT-001` **34 times** — one bit-shift error that caused a $223M loss in 2024. MoveLens catches it in under 5 seconds on Layers 1 + 2 alone.
 
-  {/* Cards */}
-  <div style={{
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-    gap: "16px",
-    width: "100%",
-    maxWidth: "800px",
-    marginBottom: "96px"
-  }}>
-    {[
-      {
-        icon: "⚡",
-        title: "Quick Start",
-        desc: "Run your first audit in 60 seconds — address, source, or GitHub repo.",
-        href: "/quickstart"
-      },
-      {
-        icon: "🔬",
-        title: "Architecture",
-        desc: "How the 4-layer pipeline works end-to-end, including the Python sidecar.",
-        href: "/architecture/overview"
-      },
-      {
-        icon: "📋",
-        title: "Rule Registry",
-        desc: "All 116 rule IDs across 13 vulnerability sectors with severities.",
-        href: "/rules/overview"
-      },
-      {
-        icon: "🔌",
-        title: "MCP Setup",
-        desc: "Audit from Claude Desktop or Claude Code — no browser needed.",
-        href: "/mcp/setup"
-      },
-      {
-        icon: "🗄️",
-        title: "Walrus Storage",
-        desc: "Permanent on-chain audit reports via Walrus decentralised storage.",
-        href: "/onchain/walrus"
-      },
-      {
-        icon: "📡",
-        title: "API Reference",
-        desc: "REST API — start jobs, poll status, fetch full reports.",
-        href: "/api/audit"
-      },
-    ].map(card => (
-      <a key={card.title} href={card.href} style={{
-        background: "rgba(255,255,255,0.03)",
-        border: "1px solid rgba(255,255,255,0.07)",
-        borderRadius: "16px",
-        padding: "24px",
-        textDecoration: "none",
-        color: "inherit",
-        display: "flex",
-        flexDirection: "column",
-        gap: "10px",
-        transition: "border-color 0.2s",
-      }}
-      onMouseEnter={e => e.currentTarget.style.borderColor = "rgba(77,162,255,0.4)"}
-      onMouseLeave={e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)"}
-      >
-        <span style={{ fontSize: "24px" }}>{card.icon}</span>
-        <div style={{ fontWeight: 600, fontSize: "15px", color: "#fff" }}>{card.title}</div>
-        <div style={{ fontSize: "13px", color: "rgba(255,255,255,0.4)", lineHeight: 1.6 }}>{card.desc}</div>
-      </a>
-    ))}
-  </div>
+## Start here
 
-  {/* Cetus callout */}
-  <div style={{
-    width: "100%",
-    maxWidth: "800px",
-    background: "rgba(255,50,50,0.05)",
-    border: "1px solid rgba(255,80,80,0.15)",
-    borderRadius: "20px",
-    padding: "32px 36px",
-    marginBottom: "96px",
-    display: "flex",
-    flexDirection: "column",
-    gap: "12px"
-  }}>
-    <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-      <span style={{
-        background: "#FF4444",
-        color: "#fff",
-        fontWeight: 800,
-        fontSize: "12px",
-        padding: "3px 10px",
-        borderRadius: "6px",
-        letterSpacing: "0.06em"
-      }}>F</span>
-      <span style={{ fontSize: "13px", color: "rgba(255,255,255,0.4)", fontFamily: "monospace" }}>ML-INT-001 · 34 critical</span>
-    </div>
-    <h3 style={{ margin: 0, fontSize: "20px", fontWeight: 700, color: "#fff" }}>
-      Cetus Protocol — $223M lost to one bit-shift
-    </h3>
-    <p style={{ margin: 0, fontSize: "14px", color: "rgba(255,255,255,0.45)", lineHeight: 1.7, maxWidth: "540px" }}>
-      <code style={{ color: "#4DA2FF" }}>checked_shlw</code> instead of <code style={{ color: "#4DA2FF" }}>checked_shl</code> — one character, 34 call sites, $223M in losses. MoveLens catches this instantly with rule ML-INT-001.
-    </p>
-    <a href="https://movelens.onrender.com/app" style={{
-      marginTop: "8px",
-      alignSelf: "flex-start",
-      fontSize: "13px",
-      fontWeight: 600,
-      color: "#FF6B6B",
-      textDecoration: "none",
-      borderBottom: "1px solid rgba(255,107,107,0.3)",
-      paddingBottom: "2px"
-    }}>Re-run the Cetus audit →</a>
-  </div>
+<CardGroup cols={2}>
+  <Card title="Quick Start" icon="bolt" href="/quickstart">
+    Audit a live package, paste source, or point at a GitHub repo — all in under 60 seconds.
+  </Card>
+  <Card title="Architecture" icon="layer-group" href="/architecture/overview">
+    Full pipeline diagram with every layer, the async API, and key design decisions.
+  </Card>
+  <Card title="Rule Registry" icon="shield-check" href="/rules/sectors">
+    All 116 rule IDs across 13 sectors — Layer 1, Layer 2 OZ benchmarks, and Layer 4 markers.
+  </Card>
+  <Card title="MCP Setup" icon="plug" href="/mcp/setup">
+    Connect MoveLens to Claude Desktop or Claude Code in two steps.
+  </Card>
+</CardGroup>
 
-  {/* Watermark */}
-  <div style={{
-    paddingBottom: "48px",
-    fontSize: "12px",
-    color: "rgba(255,255,255,0.2)",
-    textAlign: "center"
-  }}>
-    Automated pre-screen — not a substitute for a human audit.
-  </div>
+## Track context
 
-</div>
+- **Competition:** Sui Overflow 2026 — Walrus track
+- **Deadline:** June 21, 2026
+- **Status:** 36 features implemented (F18 blocked on mainnet SUI for MemWal account)
+- **Live demo:** [movelens.onrender.com](https://movelens.onrender.com)
+- **Repository:** [github.com/jeetpatel5767/movelens](https://github.com/jeetpatel5767/movelens)
+- **Signer address:** `0x8a271c5a35e7fdac64fd811b57d6e605f81697fd12b8a1867300abf867429d57`
+
+<Note>
+  MoveLens uses zero paid AI APIs in the audit engine. The only external call is Groq free tier (Layer 4, optional). Without a `GROQ_API_KEY`, the pipeline falls back to the sidecar keyword heuristic and remains fully functional on Layers 1–3.
+</Note>
