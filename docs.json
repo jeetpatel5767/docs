@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "name": "MoveLens",
-  "theme": "venus",
+  "theme": "luma",
   "colors": {
     "primary": "#4DA2FF",
     "light": "#4DA2FF",
