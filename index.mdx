@@ -1,134 +1,255 @@
 ---
-title: Home
-description: Everything you need to set up, configure, and get the most out of Platform, Analytics, and Integrations tools.
-mode: frame
+title: MoveLens
+description: AI-powered security auditor for Sui Move smart contracts.
+mode: custom
 ---
 
-<div data-product-guide-index className="flex w-full flex-col gap-8 max-w-5xl mx-auto px-4 md:px-8 lg:px-12 py-10 lg:gap-14 lg:py-16">
-  <div className="flex max-w-[540px] flex-col gap-2 self-center text-center">
-    <h1 className="text-[30px] font-medium leading-9 tracking-tight text-gray-900 dark:text-gray-50">
-      Product Guide
+<div style={{
+  minHeight: "100vh",
+  background: "#0A0A0A",
+  color: "#fff",
+  fontFamily: "system-ui, -apple-system, sans-serif",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  padding: "0 24px"
+}}>
+
+  {/* Hero */}
+  <div style={{
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    textAlign: "center",
+    paddingTop: "96px",
+    maxWidth: "720px",
+    width: "100%"
+  }}>
+    <img src="/logo/Logo.png" alt="MoveLens" style={{ height: "64px", marginBottom: "40px" }} />
+
+    <div style={{
+      display: "inline-flex",
+      alignItems: "center",
+      gap: "8px",
+      background: "rgba(77,162,255,0.08)",
+      border: "1px solid rgba(77,162,255,0.2)",
+      borderRadius: "999px",
+      padding: "6px 16px",
+      fontSize: "12px",
+      color: "#4DA2FF",
+      letterSpacing: "0.08em",
+      fontWeight: 600,
+      marginBottom: "28px",
+      textTransform: "uppercase"
+    }}>
+      Sui Overflow 2026 · Walrus Track
+    </div>
+
+    <h1 style={{
+      fontSize: "clamp(36px, 6vw, 64px)",
+      fontWeight: 700,
+      lineHeight: 1.1,
+      letterSpacing: "-0.03em",
+      margin: "0 0 20px",
+      background: "linear-gradient(135deg, #fff 40%, rgba(255,255,255,0.5))",
+      WebkitBackgroundClip: "text",
+      WebkitTextFillColor: "transparent"
+    }}>
+      Security auditing for<br />Sui Move contracts
     </h1>
-    <p className="text-balance text-base leading-relaxed tracking-tight text-gray-600 dark:text-gray-400">
-      Everything you need to set up, configure, and get the most out of Platform, Analytics, and Integrations tools.
+
+    <p style={{
+      fontSize: "18px",
+      color: "rgba(255,255,255,0.5)",
+      lineHeight: 1.7,
+      margin: "0 0 40px",
+      maxWidth: "560px"
+    }}>
+      Four-layer hybrid analysis — deterministic rules, OZ benchmarks, LanceDB semantic recall, and Groq LLM classification. Reports stored permanently on Walrus.
     </p>
-  </div>
 
-  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-    <Card
-      title={<span className="product-guide-feature-card-title">Platform overview</span>}
-      icon="chart-no-axes-gantt"
-      href="/platform"
-      className="product-guide-feature-card"
-      size={64}
-    >
-      <span className="product-guide-feature-card-description">Setup, configure, and manage your workspace.</span>
-    </Card>
-
-    <a
-      href="/analytics"
-      className="rounded-2xl flex flex-col gap-4 border bg-gray-50 p-4 outline-none shadow-sm shadow-gray-950/5 transition hover:border-primary hover:shadow-md dark:bg-gray-950 dark:shadow-black/20 dark:hover:border-primary"
-    >
-      <Icon icon="chart-column" color="rgb(var(--primary))" size={18} className="shrink-0" />
-      <div className="flex flex-col gap-1">
-        <span className="font-serif text-base font-medium text-gray-900 dark:text-gray-50">Analytics</span>
-        <span className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-          Build, report, and visualize your data.
-        </span>
-      </div>
-    </a>
-    <a
-      href="/integrations"
-      className="rounded-2xl flex flex-col gap-4 border bg-gray-50 p-4 outline-none shadow-sm shadow-gray-950/5 transition hover:border-primary hover:shadow-md dark:bg-gray-950 dark:shadow-black/20 dark:hover:border-primary"
-    >
-      <Icon icon="code-xml" color="rgb(var(--primary))" size={18} className="shrink-0" />
-      <div className="flex flex-col gap-1">
-        <span className="font-serif text-base font-medium text-gray-900 dark:text-gray-50">Integrations</span>
-        <span className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-          Ready-to-use connectors for common platforms and flexible webhooks.
-        </span>
-      </div>
-    </a>
-  </div>
-
-  <hr className="border-0 border-t border-border" />
-
-  <div className="flex flex-col gap-4">
-    <h2 className="font-serif text-xl font-medium leading-normal text-gray-900 dark:text-gray-50">Common tasks</h2>
-
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-      <a
-        href="/platform/configuration/user-management"
-        className="rounded-2xl flex flex-col gap-4 border bg-gray-50 p-4 outline-none shadow-sm shadow-gray-950/5 transition hover:border-primary hover:shadow-md dark:bg-gray-950 dark:shadow-black/20 dark:hover:border-primary"
-      >
-        <Icon icon="users" color="rgb(var(--primary))" size={18} className="shrink-0" />
-        <div className="flex flex-col gap-1">
-          <span className="font-serif text-base font-medium text-gray-900 dark:text-gray-50">Manage your team</span>
-          <span className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-            Add members, assign roles, and control access across your workspace.
-          </span>
-        </div>
+    <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", justifyContent: "center" }}>
+      <a href="https://movelens.onrender.com/app" style={{
+        background: "#4DA2FF",
+        color: "#000",
+        fontWeight: 700,
+        fontSize: "14px",
+        padding: "12px 28px",
+        borderRadius: "999px",
+        textDecoration: "none",
+        letterSpacing: "0.01em"
+      }}>
+        Launch Audit →
       </a>
-      <a
-        href="/analytics/connect-data"
-        className="rounded-2xl flex flex-col gap-4 border bg-gray-50 p-4 outline-none shadow-sm shadow-gray-950/5 transition hover:border-primary hover:shadow-md dark:bg-gray-950 dark:shadow-black/20 dark:hover:border-primary"
-      >
-        <Icon icon="database" color="rgb(var(--primary))" size={18} className="shrink-0" />
-        <div className="flex flex-col gap-1">
-          <span className="font-serif text-base font-medium text-gray-900 dark:text-gray-50">Connect a data source</span>
-          <span className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-            Link a database, data warehouse, or third-party data provider.
-          </span>
-        </div>
-      </a>
-      <a
-        href="/integrations/connectors/crm"
-        className="rounded-2xl flex flex-col gap-4 border bg-gray-50 p-4 outline-none shadow-sm shadow-gray-950/5 transition hover:border-primary hover:shadow-md dark:bg-gray-950 dark:shadow-black/20 dark:hover:border-primary"
-      >
-        <Icon icon="building-2" color="rgb(var(--primary))" size={18} className="shrink-0" />
-        <div className="flex flex-col gap-1">
-          <span className="font-serif text-base font-medium text-gray-900 dark:text-gray-50">Connect your CRM</span>
-          <span className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-            Sync your CRM through native connectors or a custom strategy.
-          </span>
-        </div>
-      </a>
-      <a
-        href="/analytics/dashboards/create-dashboard"
-        className="rounded-2xl flex flex-col gap-4 border bg-gray-50 p-4 outline-none shadow-sm shadow-gray-950/5 transition hover:border-primary hover:shadow-md dark:bg-gray-950 dark:shadow-black/20 dark:hover:border-primary"
-      >
-        <Icon icon="layout-dashboard" color="rgb(var(--primary))" size={18} className="shrink-0" />
-        <div className="flex flex-col gap-1">
-          <span className="font-serif text-base font-medium text-gray-900 dark:text-gray-50">Build a dashboard</span>
-          <span className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-            Add charts, set filters, and share a live dashboard.
-          </span>
-        </div>
-      </a>
-      <a
-        href="/integrations/webhooks/configure"
-        className="rounded-2xl flex flex-col gap-4 border bg-gray-50 p-4 outline-none shadow-sm shadow-gray-950/5 transition hover:border-primary hover:shadow-md dark:bg-gray-950 dark:shadow-black/20 dark:hover:border-primary"
-      >
-        <Icon icon="webhook" color="rgb(var(--primary))" size={18} className="shrink-0" />
-        <div className="flex flex-col gap-1">
-          <span className="font-serif text-base font-medium text-gray-900 dark:text-gray-50">Set up a webhook</span>
-          <span className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-            Subscribe to events and route them to any endpoint.
-          </span>
-        </div>
-      </a>
-      <a
-        href="/analytics/reports/scheduled-reports"
-        className="rounded-2xl flex flex-col gap-4 border bg-gray-50 p-4 outline-none shadow-sm shadow-gray-950/5 transition hover:border-primary hover:shadow-md dark:bg-gray-950 dark:shadow-black/20 dark:hover:border-primary"
-      >
-        <Icon icon="calendar-clock" color="rgb(var(--primary))" size={18} className="shrink-0" />
-        <div className="flex flex-col gap-1">
-          <span className="font-serif text-base font-medium text-gray-900 dark:text-gray-50">Schedule a report</span>
-          <span className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-            Send recurring snapshots via email or Slack.
-          </span>
-        </div>
+      <a href="/quickstart" style={{
+        background: "rgba(255,255,255,0.06)",
+        border: "1px solid rgba(255,255,255,0.1)",
+        color: "#fff",
+        fontWeight: 600,
+        fontSize: "14px",
+        padding: "12px 28px",
+        borderRadius: "999px",
+        textDecoration: "none"
+      }}>
+        Read the docs
       </a>
     </div>
   </div>
+
+  {/* Divider */}
+  <div style={{
+    width: "100%",
+    maxWidth: "800px",
+    height: "1px",
+    background: "rgba(255,255,255,0.06)",
+    margin: "80px 0 64px"
+  }} />
+
+  {/* Stats row */}
+  <div style={{
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
+    gap: "24px",
+    width: "100%",
+    maxWidth: "800px",
+    marginBottom: "80px",
+    textAlign: "center"
+  }}>
+    {[
+      { value: "65", label: "Regex rules" },
+      { value: "10", label: "OZ benchmarks" },
+      { value: "52", label: "Corpus snippets" },
+      { value: "4", label: "Analysis layers" },
+      { value: "116", label: "Total rule IDs" },
+      { value: "$223M", label: "Exploits detected" },
+    ].map(stat => (
+      <div key={stat.label}>
+        <div style={{ fontSize: "32px", fontWeight: 700, color: "#4DA2FF", lineHeight: 1 }}>{stat.value}</div>
+        <div style={{ fontSize: "13px", color: "rgba(255,255,255,0.4)", marginTop: "6px" }}>{stat.label}</div>
+      </div>
+    ))}
+  </div>
+
+  {/* Cards */}
+  <div style={{
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+    gap: "16px",
+    width: "100%",
+    maxWidth: "800px",
+    marginBottom: "96px"
+  }}>
+    {[
+      {
+        icon: "⚡",
+        title: "Quick Start",
+        desc: "Run your first audit in 60 seconds — address, source, or GitHub repo.",
+        href: "/quickstart"
+      },
+      {
+        icon: "🔬",
+        title: "Architecture",
+        desc: "How the 4-layer pipeline works end-to-end, including the Python sidecar.",
+        href: "/architecture/overview"
+      },
+      {
+        icon: "📋",
+        title: "Rule Registry",
+        desc: "All 116 rule IDs across 13 vulnerability sectors with severities.",
+        href: "/rules/overview"
+      },
+      {
+        icon: "🔌",
+        title: "MCP Setup",
+        desc: "Audit from Claude Desktop or Claude Code — no browser needed.",
+        href: "/mcp/setup"
+      },
+      {
+        icon: "🗄️",
+        title: "Walrus Storage",
+        desc: "Permanent on-chain audit reports via Walrus decentralised storage.",
+        href: "/onchain/walrus"
+      },
+      {
+        icon: "📡",
+        title: "API Reference",
+        desc: "REST API — start jobs, poll status, fetch full reports.",
+        href: "/api/audit"
+      },
+    ].map(card => (
+      <a key={card.title} href={card.href} style={{
+        background: "rgba(255,255,255,0.03)",
+        border: "1px solid rgba(255,255,255,0.07)",
+        borderRadius: "16px",
+        padding: "24px",
+        textDecoration: "none",
+        color: "inherit",
+        display: "flex",
+        flexDirection: "column",
+        gap: "10px",
+        transition: "border-color 0.2s",
+      }}
+      onMouseEnter={e => e.currentTarget.style.borderColor = "rgba(77,162,255,0.4)"}
+      onMouseLeave={e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)"}
+      >
+        <span style={{ fontSize: "24px" }}>{card.icon}</span>
+        <div style={{ fontWeight: 600, fontSize: "15px", color: "#fff" }}>{card.title}</div>
+        <div style={{ fontSize: "13px", color: "rgba(255,255,255,0.4)", lineHeight: 1.6 }}>{card.desc}</div>
+      </a>
+    ))}
+  </div>
+
+  {/* Cetus callout */}
+  <div style={{
+    width: "100%",
+    maxWidth: "800px",
+    background: "rgba(255,50,50,0.05)",
+    border: "1px solid rgba(255,80,80,0.15)",
+    borderRadius: "20px",
+    padding: "32px 36px",
+    marginBottom: "96px",
+    display: "flex",
+    flexDirection: "column",
+    gap: "12px"
+  }}>
+    <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+      <span style={{
+        background: "#FF4444",
+        color: "#fff",
+        fontWeight: 800,
+        fontSize: "12px",
+        padding: "3px 10px",
+        borderRadius: "6px",
+        letterSpacing: "0.06em"
+      }}>F</span>
+      <span style={{ fontSize: "13px", color: "rgba(255,255,255,0.4)", fontFamily: "monospace" }}>ML-INT-001 · 34 critical</span>
+    </div>
+    <h3 style={{ margin: 0, fontSize: "20px", fontWeight: 700, color: "#fff" }}>
+      Cetus Protocol — $223M lost to one bit-shift
+    </h3>
+    <p style={{ margin: 0, fontSize: "14px", color: "rgba(255,255,255,0.45)", lineHeight: 1.7, maxWidth: "540px" }}>
+      <code style={{ color: "#4DA2FF" }}>checked_shlw</code> instead of <code style={{ color: "#4DA2FF" }}>checked_shl</code> — one character, 34 call sites, $223M in losses. MoveLens catches this instantly with rule ML-INT-001.
+    </p>
+    <a href="https://movelens.onrender.com/app" style={{
+      marginTop: "8px",
+      alignSelf: "flex-start",
+      fontSize: "13px",
+      fontWeight: 600,
+      color: "#FF6B6B",
+      textDecoration: "none",
+      borderBottom: "1px solid rgba(255,107,107,0.3)",
+      paddingBottom: "2px"
+    }}>Re-run the Cetus audit →</a>
+  </div>
+
+  {/* Watermark */}
+  <div style={{
+    paddingBottom: "48px",
+    fontSize: "12px",
+    color: "rgba(255,255,255,0.2)",
+    textAlign: "center"
+  }}>
+    Automated pre-screen — not a substitute for a human audit.
+  </div>
+
 </div>
