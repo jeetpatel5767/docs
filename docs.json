@@ -1,97 +1,71 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "almond",
-  "name": "Product Guide",
-  "description": "Step-by-step guides for every product—platform setup, analytics, and integrations in one place.",
+  "name": "MoveLens",
+  "theme": "venus",
   "colors": {
-    "primary": "#166E3F",
-    "light": "#26BD6C",
-    "dark": "#166E3F"
+    "primary": "#4DA2FF",
+    "light": "#4DA2FF",
+    "dark": "#1A6FCC"
   },
   "favicon": "/favicon.ico",
-  "icons": {
-    "library": "lucide"
+  "logo": {
+    "dark": "/logo/dark.svg",
+    "light": "/logo/light.svg"
   },
-  "styling": {
-    "eyebrows": "breadcrumbs"
-  },
-  "contextual": {
-    "options": ["copy", "view", "assistant", "mcp", "add-mcp"]
+  "navbar": {
+    "links": [
+      {
+        "label": "GitHub",
+        "href": "https://github.com/jeetpatel5767/movelens"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Launch Audit",
+      "href": "https://movelens.onrender.com/app"
+    }
   },
   "navigation": {
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Home",
-          "icon": "house",
-          "href": "/"
-        },
-        {
-          "anchor": "Changelog",
-          "icon": "scroll-text",
-          "href": "https://www.mintlify.com/docs/changelog"
-        },
-        {
-          "anchor": "Help",
-          "icon": "life-buoy",
-          "href": "https://www.mintlify.com/docs/contact-support"
-        }
-      ]
-    },
-    "directory": "card",
     "groups": [
       {
-        "group": "Platform",
-        "icon": "layers",
-        "expanded": true,
+        "group": "Get Started",
+        "pages": ["introduction", "quickstart"]
+      },
+      {
+        "group": "Architecture",
         "pages": [
-          "platform/quickstart",
-          "platform/key-concepts",
-          "platform/configuration/settings",
-          "platform/configuration/user-management",
-          "platform/administration/roles-permissions"
+          "architecture/overview",
+          "architecture/layer1",
+          "architecture/layer2",
+          "architecture/layer3",
+          "architecture/layer4"
         ]
       },
       {
-        "group": "Analytics",
-        "icon": "chart-bar",
-        "expanded": true,
-        "pages": [
-          "analytics/quickstart",
-          "analytics/connect-data",
-          "analytics/dashboards/create-dashboard",
-          "analytics/reports/scheduled-reports"
-        ]
+        "group": "Rule Registry",
+        "pages": ["rules/overview", "rules/sectors"]
+      },
+      {
+        "group": "On-Chain Stack",
+        "pages": ["onchain/walrus", "onchain/seal", "onchain/mvr"]
       },
       {
         "group": "Integrations",
-        "icon": "plug",
-        "expanded": true,
-        "pages": [
-          "integrations/quickstart",
-          "integrations/authentication",
-          "integrations/connectors/crm",
-          "integrations/webhooks/configure"
-        ]
+        "pages": ["mcp/setup", "mcp/tools", "github-auditing"]
+      },
+      {
+        "group": "API Reference",
+        "pages": ["api/audit", "api/report", "api/gallery"]
+      },
+      {
+        "group": "Trust & Safety",
+        "pages": ["security", "privacy"]
       }
     ]
   },
-  "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
-  },
-  "navbar": {
-    "links": [],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
-    }
-  },
   "footer": {
     "socials": {
-      "x": "https://x.com/yourcompany",
-      "linkedin": "https://linkedin.com/company/yourcompany"
+      "github": "https://github.com/jeetpatel5767/movelens"
     }
   }
 }
