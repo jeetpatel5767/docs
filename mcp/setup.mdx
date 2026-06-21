@@ -1,101 +1,102 @@
 ---
-title: "MCP Server Setup"
-description: "Install the MoveLens MCP server to audit Sui Move contracts directly from Claude Desktop or Claude Code — no browser required."
+title: "MCP Setup"
+description: "Connect MoveLens to Claude Desktop or Claude Code in 2 steps — no cloning, no npm install."
 ---
 
-## What is MCP?
+## What you get
 
-The [Model Context Protocol](https://modelcontextprotocol.io) is Anthropic's open standard for exposing tools to AI assistants. Once the MoveLens MCP server is connected, any Claude conversation can call `audit_move_source`, `audit_package_id`, or `audit_github_repo` as native tools.
+Once connected, any Claude conversation can call three native tools:
 
----
-
-## Prerequisites
-
-- Node.js 18+
-- The MoveLens repo cloned locally
-- (Optional) A `GROQ_API_KEY` for Layer 4 LLM classification
-
-```bash
-git clone https://github.com/jeetpatel5767/movelens.git
-cd movelens
-npm install
-```
+| Tool | What it does |
+|---|---|
+| `audit_move_source` | Paste raw Move code → instant security report |
+| `audit_package_id` | On-chain package address → full audit via Sui GraphQL |
+| `audit_github_repo` | Public GitHub URL → audits every `.move` file in the repo |
 
 ---
 
-## Claude Desktop setup
+## Claude Desktop — 2 steps
 
 <Steps>
-  <Step title="Locate the config file">
+  <Step title="Add MoveLens to your config file">
+    Open your Claude Desktop config:
     - **macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
     - **Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
-  </Step>
 
-  <Step title="Add MoveLens to mcpServers">
+    Paste this (create the file if it doesn't exist):
+
     ```json
     {
       "mcpServers": {
         "movelens": {
-          "command": "npx",
-          "args": ["tsx", "/ABSOLUTE/PATH/TO/movelens/mcp-server.ts"],
-          "env": {
-            "MOVELENS_URL": "https://movelens.onrender.com"
-          }
+          "url": "http://16.171.224.235:3000/api/mcp"
         }
       }
     }
     ```
 
-    Replace `/ABSOLUTE/PATH/TO/movelens/` with the actual path on your machine.
-
-    <Tip>
-      Set `MOVELENS_URL` to `http://localhost:3000` if you're running MoveLens locally for faster audits without cold-start delays.
-    </Tip>
+    That's it — no local server, no npm install, no cloning required.
   </Step>
 
-  <Step title="Restart Claude Desktop">
-    Fully quit and relaunch. The MoveLens tools appear automatically in the tool picker (hammer icon).
-  </Step>
+  <Step title="Restart Claude Desktop and try it">
+    Fully quit and relaunch Claude Desktop. The MoveLens tools appear automatically in the tool picker (hammer icon).
 
-  <Step title="Test it">
-    Ask Claude: *"Audit this Move contract:"* and paste any `.move` source. Claude calls `audit_move_source` and returns a full security report inline.
+    Try it instantly:
+
+    > *"Audit this Move contract:"* → paste any `.move` source
+
+    or
+
+    > *"Audit the Cetus CLMM package: `0xa9b0ffe2f8e713a66ad1aa361cf1984526a5048c6de786b4dd292f3eed204b92` on mainnet"*
+
+    Claude calls `audit_package_id` and returns a full security report inline — risk grade, all findings with line numbers and suggested fixes, and a permanent Walrus blob ID.
   </Step>
 </Steps>
 
 ---
 
-## Claude Code setup
+## Claude Code — 1 command
 
 ```bash
-# Add to the current project
-claude mcp add movelens -- npx tsx /path/to/movelens/mcp-server.ts
-
-# Or with a custom backend URL
-MOVELENS_URL=http://localhost:3000 claude mcp add movelens -- npx tsx /path/to/movelens/mcp-server.ts
+claude mcp add movelens --url http://16.171.224.235:3000/api/mcp
 ```
 
-The tools are then available in any `claude` session within that project.
+The tools are then available in every `claude` session within that project.
 
 ---
 
-## Environment variables
+## How it works
 
-| Variable | Required | Default | Description |
-|---|---|---|---|
-| `MOVELENS_URL` | No | `https://movelens.onrender.com` | Base URL of the MoveLens backend |
+```
+Claude Desktop / Claude Code
+        │  MCP tool call (HTTP)
+        ▼
+http://16.171.224.235:3000/api/mcp
+        │  submits audit job
+        ▼
+  MoveLens audit engine
+  ├─ Layer 1: 65 regex rules
+  ├─ Layer 2: 10 OZ benchmarks
+  ├─ Layer 3: LanceDB semantic recall
+  └─ Layer 4: Groq llama-3.3-70b (optional)
+        │  stores report
+        ▼
+     Walrus blob ← permanent on-chain
+        │  returns markdown report
+        ▼
+     Claude response (inline)
+```
 
-The MCP server itself is a thin client — it submits audit jobs to the backend and polls for completion. All analysis runs on the backend.
+The MCP server is a thin HTTP bridge hosted alongside the audit engine. No state is stored in the MCP layer — all analysis and storage happens in the backend.
 
 ---
 
-## Timeouts & cold starts
+## Timeouts
 
-The MCP server polls every **3 seconds** and times out after **3 minutes**. On Render free tier, the first request after a 15-minute idle period triggers a cold start (~30s). The server waits through this automatically.
-
-If the audit times out, retry — the cold start only happens once per 15-minute idle window.
+Audits complete in **10–60 seconds** for most contracts. The MCP server polls every 3 seconds and times out after 3 minutes. If an audit times out, retry — it's idempotent.
 
 ---
 
-## Supported transports
-
-The server uses `StdioServerTransport` — the standard MCP stdio transport compatible with Claude Desktop, Claude Code, and any MCP-compatible client.
+<Note>
+  Layer 4 (Groq ML classification) requires a `GROQ_API_KEY` to be set on the server. Without it, the pipeline runs on Layers 1–3 and remains fully functional. All findings from Layers 1 and 2 are deterministic and confidence 1.0.
+</Note>
